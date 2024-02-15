@@ -6,17 +6,17 @@ Notes and code snippets just to get my thoughts in order. Take them if you need 
 
 ___
 
-### Short introduction
+## Short introduction
 
 > Why not procedural programming ?
 
 The idea behind the Object Oriented approach is to allow to create a development environment where you can have more complexity & scalability at same time.<br/>
-*Procedural programming* executes commands in a linear order, based on the order you have written your code; instead *OOP* is based on the concept of *Classes* and code is not executed linearly (thanks to concepts like *inheritance* and *polymorphism*).<br/>
+*Procedural programming* executes commands in a linear order, based on the order you have written your code; instead *Object-Oriented Programming* is based on the concept of *Classes* and code is not executed linearly (thanks to concepts like *inheritance* and *polymorphism*).<br/>
 For sure procedural approach is faster and simpler (and also still the right choice when you have to face simple programming), but when you have to face more complex applications the better road to follow is the OOP one. Through OOP you can organize the work in a team assigning one of the different fields of the application through *classes*, achieving a code more maintainable.
 
 ___
 
-### 1. Class concept
+## 1. Class concept
 
 > Short Definition: 
 > A *class* is a stamp (or a template) that identify an instantiated object that we want to link to properties and specifical functions to manipulate its datas or other infos. So the class is the stamp/template of what (through the OOP approach) we want to represent in code as an object.<br/>
@@ -41,9 +41,17 @@ $bike->brand = 'Canyon';
 $bike->model = 'Gryzl';
 var_dump($bike);
 ```
-Note: we have used a **special arrow operator (->,  assignment of a value operator)** to call properties to the object and assign a value to them; this is possible because of the `public` declaration of the property in this class.
+var_dump gives us the object of type Bike with the specified properties. Here lays the key concept of OOP: the idea of the possibility to call each time we want the class Bike and have different objects (bikes) instantiated.<br/>
+Here we can find further difference with procedural programming: in procedural (the sample done above) in an array *php* has to run through the entire array to go to the index wanted; in OOP instead, using objects, *php* has not to re-run through the entire code, but goes directly to the property/method needed. 
 
-#### Main features of a class
-*Properties* & *Methods* are the two key concepts on which a class is based.
+Note: we have used the **single arrow operator (`->`,  operator for assignment of a value to a variable or a constant != from `=>`, that is the operator for key/value assignment)** to call properties to the object and assign a value to them; this is possible because of the `public` declaration of the property in this class.<br/>
+ed. `->` This is also referred to as the **object operator**, or sometimes the single arrow operator.
+It is an access operator used **for access/call methods and properties in a PHP object** in Object-Oriented Programming (OOP).
+
+### Main features of a class
+*Properties* & *Methods* are the two key concepts on which a class is based.<br/>
+
+### Cloning
+
 
 
