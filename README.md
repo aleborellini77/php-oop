@@ -82,7 +82,8 @@ class Bike {
           public $brand;
           public $model;
 
-    function fullModel() {
+    function fullModel()
+    {
         return $this->model . ' ' . $this->brand;
     }
 
@@ -95,4 +96,20 @@ $bike->brand = 'Canyon';
 echo $bike->fullModel();
 ```
 Two more things emerging from this last snippet: the first one that, like said above, the single arrow operator in php OOP is used also to connect instances to related methods (meaning you can call to an instance methods belonging to the class of that same instance); the second one is simply another note on differences between procedural and OOP, in fact this possibility to define methods inside a class to manage properties and so datas is really precious in order to have faster ways to access to datas.  
+
+### Class magic method __construct()
+When we instantiate an object for a class (for example using `$bike = new Bike`) is also possible to directly pass some parameters instantiating it.<br/>
+How? Through a php *magic method* is possible to do so -> the __construct() method allows to directly pass parameters when instantiating. This is because this magic method is automatically loaded when the class is istantiated (it's like defining parameters to call for a mixin in SCSS/SASS).
+
+```
+function __construct($brand, $model, $color)
+     {
+       $this->color = $brand;
+       $this->color = $model;
+       $this->color = $color;
+     }
+
+$bike = new Bike('Colnago', 'G3X', 'Blue');
+var_dump($bike);
+```
 
