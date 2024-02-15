@@ -23,6 +23,7 @@ ___
 
 It's really claryfing to me this idea: example, we are speaking about Bikes, *in a procedural approach* to call a specific Bike with its properties you have to create a variable `$bike` containing an associative array, instead OOP allows you to use the generic class created to instantiate that $bike.
 
+How to declare a class -> class NameOfClass {properties & methods}
 ```
 class Bike {
           public $color;
@@ -32,7 +33,7 @@ class Bike {
 ```
 Praxis is to name the class with first Capital letter (or also example `AboutPage`).
 
-*In object-oriented approach* to call a specific Bike with specific properties you simply instantiate an object though the generic class created (so the class operates as a stamp/template).
+*In object-oriented approach* to call a specific Bike with specific properties you simply instantiate in a variable an object though the generic class previously created (so the class operates as a stamp/template).
 ```
 $bike = new Bike;
 $bike->color = 'Green';
@@ -40,7 +41,7 @@ $bike->brand = 'Canyon';
 $bike->model = 'Gryzl';
 var_dump($bike);
 ```
-Note: we have used a **special arrow operator (->)** to call properties to the object; this is possible because of the `public` declaration of the property in this class.
+Note: we have used a **special arrow operator (->,  assignment of a value operator)** to call properties to the object and assign a value to them; this is possible because of the `public` declaration of the property in this class.
 
 #### Main features of a class
 *Properties* & *Methods* are the two key concepts on which a class is based.
