@@ -48,10 +48,51 @@ Note: we have used the **single arrow operator (`->`,  operator for assignment o
 ed. `->` This is also referred to as the **object operator**, or sometimes the single arrow operator.
 It is an access operator used **for access/call methods and properties in a PHP object** in Object-Oriented Programming (OOP).
 
-### Main features of a class
-*Properties* & *Methods* are the two key concepts on which a class is based.<br/>
 
 ### Cloning
+Attention to the idea of `instance` -> *the object is the instance of a class ok, but we have go deeper and say that precisely **the instance is only a pointer to that class** and not the class itself*. This means that we cannot clone an instance of a class ( sample doing `$bike2 = $bike` and pretend to assign through object operator values to the class properties and have different results/values). In fact to clone correctly an instance/object you have to use the php command `clone`.
+```
+class Bike {
+          public $color;
+          public $brand;
+          public $model;
+}
 
+$bike = new Bike;
+$bike->color = 'Green';
+$bike->brand = 'Canyon';
+$bike->model = 'Gryzl';
 
+$bike2 = clone $bike;
+$bike2->color = 'yellow';
+$bike2->brand = 'Specialized';
+$bike2->model = 'S-Gravel';
+
+var_dump($bike);
+var_dump($bike2);
+```
+ 
+
+### Main features of a class
+*Properties* & *Methods* are the two key concepts on which a class is based.<br/>
+Instead of access to properties each time using the single arrow operator we can also use/define specifical *methods* (for example if we want to combine more properties in a string to print). In procedural you had to combine access by index for each Bike (sample `$fullmodelbike = $bike['model'] . ' ' . $bike['brand'];`); instead in OOP we define in class a specific method to return full name.
+```
+class Bike {
+          public $color;
+          public $brand;
+          public $model;
+
+    function fullModel() {
+        return $this->model . ' ' . $this->brand;
+    }
+
+}
+
+$bike = new Bike;
+$bike->color = 'Green';
+$bike->brand = 'Canyon';
+
+echo $bike->fullModel();
+```
+Two more things emerging from this last snippet: the first one that, like said above, the single arrow operator in php OOP is used also to connect instances to related methods (meaning you can call to an instance methods belonging to the class of that same instance); the second one is simply another note on differences between procedural and OOP, in fact this possibility to define methods inside a class to manage properties and so datas is really precious in order to have faster ways to access to datas.  
 
