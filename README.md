@@ -74,7 +74,7 @@ var_dump($bike2);
  
 
 ### Main features of a class
-*Properties* & *Methods* are the two key concepts on which a class is based.<br/>
+*Properties* & *Methods* are the two key concepts on which a class is based. We'll see that is possible to consider them as *variables* and *functions*.<br/>
 Instead of access to properties each time using the single arrow operator we can also use/define specifical *methods* (for example if we want to combine more properties in a string to print). In procedural you had to combine access by index for each Bike (sample `$fullmodelbike = $bike['model'] . ' ' . $bike['brand'];`); instead in OOP we define in class a specific method to return full name.
 ```
 class Bike {
@@ -112,4 +112,59 @@ function __construct($brand, $model, $color)
 $bike = new Bike('Colnago', 'G3X', 'Blue');
 var_dump($bike);
 ```
+
+***
+> Attention: PHP lang looks at every method starting with __ (double underscore) as a magic method.<br/>
+> Here a table with PHP main magic methods:
+> | Method      | Description |
+> | ----------- | ----------- |
+> | __construct() | Class constructor. Called automatically when you instantiate that class. |
+> | __destruct() | Class destructor. Called to destroy or to deallocate objects. |
+> | __call() | Caller method to call methods that dont't exist or private ones. |
+> | __callStatic() | Caller method to call static methods. |
+> | __get() | Getter method to get/read inaccessible properties. |
+> | __set() | Setter (🐶) method to set/write an inaccessible property. |
+> | __toString() | Magic method to treat the object as a string (example in a echo) |
+> | __clone() | Magic method to invoke the clone method on an object to generate a copy. |
+> | others.. | Link to italian website covering the argument https://www.html.it/pag/18363/i-metodi-magici-prima-parte/ |
+***
+
+## 2. Visibility of properties/methods
+
+In OOP is fundamental in order to have applications more secure and not manipulable to grant the right level of **visibility** to each property / method in a class.
+The idea is that a property/method could be called/used only under the visibility rules defined in class level.
+There are three levels of visibility:<br/>
+- **public** --> this is the default one if nothing has been specified. The public visibility level grants that a property/method could be called outside the class (`$bike->brand = 'Canyon'`). 
+- **private** --> The private visibility grants that properties/methods could be used only inside the same class.
+- **protected** --> The protected level instead is a mix of the previous two: it grants the use of properties/methods inside for sure that class, but also inside other classes that comes from that same class (*inheritance* principle).
+
+Looking at the table above covering some of the most commond magic methods of php we can see that there are two methods used to get/set properties that are inaccesible (because of `private` level of visibility).<br/>
+__get() and set() methods are really useful because in this way we can make accessible private properties outside the class, but they are giving this permission to all properties and so you have to use them carefully: if you are using them, every time you add a new private property you have to add an exception (with an `if` condition to your __get() and __set() functions). It's quite slow and verbose probably.<br/>
+The best way to move here is to define a **specific getter/setter function** --> the praxis tells us to define the method using `get+NameOfPropertyInCapitalLetter` or `set+NameOfPropertyInCapitalLetter`.
+```
+class Bike {
+       private $size;
+
+    public getSize(): string
+    {
+        return $this->size;
+    }
+
+    public setSize(string $size): void
+    {
+      return $this->size = $size;
+    }
+
+}
+
+$bike = new Bike;
+$bike->setSize('Medium');
+$bike->getSize();
+var_dump($bike);
+```
+
+### Constants
+
+In a class of OOP we can also (like in procedural) define a constant. Constants can also have visibility level setted.
+
 
