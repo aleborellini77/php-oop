@@ -210,11 +210,10 @@ ___
 
 ## 3. Inheritance
 Inheritance concept is at the basis of OOP in php: **a class can inherit properties and methods by a parent class (and so being child class of that one)**. The child class can implement new specific properties and methods, but also can *override* properties/methods of parent class (through *overriding technique*). 
-Important note: **in php a class can extend another one, but just one** (not two or more). This explains *interfaces* existence (as we'll see, interfaces can be implemented more than one at a time).   
+Important note: **in php a class can extend another one, but just one** (not two or more). This explains *interfaces/traits* existence (as we'll see, interfaces/traits can be implemented more than one at a time, allowing a sort of *multiple inheritance*).   
 `extends` is the keyword to use for inheritance.
 
 ```
-
 	class Bike {
 			public $color; // public visibility
 			protected $brand; // visible in parent class and child ones
@@ -261,9 +260,9 @@ Important note: **in php a class can extend another one, but just one** (not two
 
 ```
 
-In example above we can see some of the main features that *inheritance* brings to us: RoadBike class is an extension of Bike class (child class & parent class); we can see that properties (called also attributes) and methods from parent class has been inherited by child class (public and protected). Instead, the private property declared in parent class Bike has been used in a public method defined inside the same class for a reason: this allowed to get this private attribute through the use of the public method of parent class ($id_frame, setIdFrame()).
+In the example above we can see some of the main features that *inheritance* brings to us: RoadBike class is an extension of Bike class (child class & parent class); we can see that properties (called also attributes) and methods from parent class has been inherited by child class (public and protected). Instead, the private property declared in parent class Bike has been used in a public method defined inside the same class for a reason: this allowed to get this private attribute through the use of the public method of parent class ($id_frame, setIdFrame()).
 
-**Overriding technique**
+**Overriding technique**<br/>
 It is based on this syntax:
 ```
 <?php
@@ -272,4 +271,41 @@ parent::methodToOverride();
 ...
 ?>
 ```
+So we can call parent class through the keyword `parent` + the scope operator `::` + the method to override. This is when we call a method but not in traditional way, using instead the scope operator and the parent class.<br/>
+In general we use the *override technique* to simply recall a method or to override it (for example adding stuff to it).
+```
+
+	class Bike {
+			public $color;
+			protected $brand; 
+			private $id_frame; 
+			
+			public function getColor() {
+				return $this->color;
+			}				
+			public function setIdFrame($id_frame) {
+				// set id_frame
+				 $this->id_frame = $id_frame;
+			}
+	}
+
+	class RoadBike extends Bike {
+		public $model;
+			
+		function getColor() {
+                     parent::getColor();
+		     echo $this->model . '' . parent::setIdFrame($id_frame); 		
+		}
+	}
+```
+
+> Constructor & destructor magic methods of php are inherited by child classes by default (but you can also override them if you need it! -> example: if you want to add a parameter to pass to the constructor method for the subclass/child class).
+
+`final` keyword -> is used to prevent the inheritance mechanism: in fact when you prepend to method or also class declaration the *final* keyword you are blocking the inheritance mechanism (if we try to extend a final class, we get a php error telling us that is prohibited  to extend a *final class*). 
+
+___
+
+## 4. Multiple Inheritance
+
+
 
