@@ -129,6 +129,8 @@ var_dump($bike);
 > | others.. | Link to italian website covering the argument https://www.html.it/pag/18363/i-metodi-magici-prima-parte/ |
 ***
 
+___
+
 ## 2. Visibility of properties/methods
 
 In OOP is fundamental in order to have applications more secure and not manipulable to grant the right level of **visibility** to each property / method in a class.
@@ -204,7 +206,61 @@ As seen above we can access to the constant inside the class in two ways: by usi
 >  }
 > ```   
 
-## 3. Inheritance
+___
 
+## 3. Inheritance
+Inheritance concept is at the basis of OOP in php: **a class can inherit properties and methods by a parent class (and so being child class of that one)**. The child class can implement new specific properties and methods, but also can *override* properties/methods of parent class (through *overriding technique*). 
+Important note: **in php a class can extend another one, but just one** (not two or more). This explains *interfaces* existence (as we'll see, interfaces can be implemented more than one at a time).   
+`extends` is the keyword to use for inheritance.
+
+```
+
+	class Bike {
+			public $color; // public visibility
+			protected $brand; // visible in parent class and child ones
+			private $id_frame; // private, so visible only on this class
+			// constructor
+			public function __construct()
+			{
+				echo "Calling parent class constructor"."<br>";
+				// init of $color property
+				$this->color = "Red";
+			}	
+			// methods
+			public function getColor() {
+				return $this->color;
+			}				
+			public function setIdFrame($id_frame) {
+				// set id_frame
+				 $this->id_frame = $id_frame;
+			}
+	}
+
+	// child class definition
+	class RoadBike extends Bike {
+		public $model;
+		public function __construct($model, $id_frame) // child class constructor
+		{
+			$this->setIdFrame($id_frame);
+			$this->model = $model; // init of new property of child class
+		}	
+		function setBrand(string $brand) {
+			$this->brand = $brand;
+		}
+	}
+
+	// instance of new object from Bike class
+	$bike = new Bike();
+	echo "Bike: ".$bike->getName()."<br />";
+	$roadBike = new RoadBike("AERoad","943852861950001324");
+	$roadBike->color = "Yellow";
+	$roadBike->setBrand('Canyon');
+	// print associative array of the object
+	print_r(get_object_vars($bike));
+	print_r(get_object_vars($roadBike));
+
+```
+
+In example above we can see some of the main features that *inheritance* brings to us: RoadBike class is an extension of Bike class (child class & parent class); we can see that properties (called also attributes) and methods from parent class has been inherited by child class (public and protected). Instead, the private property declared in parent class Bike has been used in a public method defined inside the same class: this allowed to get this attribute through the use of the public method of parent class (reference to $id_frame, setIdFrame()).
 
 
