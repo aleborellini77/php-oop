@@ -143,7 +143,7 @@ __get() and set() methods are really useful because in this way we can make acce
 The best way to move here is to define a **specific getter/setter function** --> the praxis tells us to define the method using `get+NameOfPropertyInCapitalLetter` or `set+NameOfPropertyInCapitalLetter`.
 ```
 class Bike {
-       private $size;
+    private $size;
 
     public getSize(): string
     {
@@ -165,6 +165,46 @@ var_dump($bike);
 
 ### Constants
 
-In a class of OOP we can also (like in procedural) define a constant. Constants can also have visibility level setted.
+In a class of OOP we can also (like in procedural) define a constant.
+Definition of a constant differs in syntax: we define a constant in php by using `const NAMEOFCONSTANT` without any symbol like `$`(constants are case-sensitive, for praxis we name them using all capital letters or also strating with `const __CAPITALLETTERS__`).
+**To define a constant in php we use the base function `define()` and this function accepts only two params: name of constant and the value** -> `define('FAVSPORT', 'basketball')` and the values accepted are: integer, float, string, boolean or null. The idea is that defining a constant has the objective of define a fixed value that cannot change during the script or the entire application. Generally constants have global visibility.
+Function to see all defined constants --> `print_r(get_defined_constants(true));`. 
+Predefined constants are *magic constants* that php lang has to offer (from its core or its extensions/modules)--> for example really useful is the constant `__FILE__` that we use to get the entire path of directory to that file; or also `__DIR__` that prints only the directory path (without that file).
+
+From php5 it is possible to define a constant also in a class. The **big difference with properties and methods of a class** is that **a constant of a class doesn't belong to the instance of that class** (such as props and methods); instead **the constant of a class belongs only to the class** so it is callable only inside classes (for this reason we cannot use $this to refer to constants or use the -> operator to refer to them from outside).
+```
+class Bike {
+    public $countryOfStore;
+    const BIKESHOP = 'Padova Canyon Bikestore';
+
+    public function getBikeShop()
+    {
+       return self::BIKESHOP;
+    }
+
+    public function getBikeShopComplete()
+    {
+       return $this->countryOfStore . ', ' . Bike::BIKESHOP;
+    }
+
+}
+$bike = new Bike;
+$bike->countryOfStore = 'Italy';
+$bike->getBikeShopComplete();
+echo $bike;
+```
+As seen above we can access to the constant inside the class in two ways: by using `self` or `the name of the class` followed by `::` the scope operator.
+> From **php8.3** we can define the type of a constant in its definition -> `const string BASKETBALLTEAM = 'Dallas Mavericks'`. This is useful from the point of view of security (language more typified) and it gives us the possibility to redefine the same constant in an extended class (only if it is of the same type, example a string).
+> ```
+> class One {
+>    const string NAME = "Simone Fontecchio";
+>  }
+> class AnotherOne {
+>    const NAME = "Gigi Datome";
+>  }
+> ```   
+
+## 3. Inheritance
+
 
 
