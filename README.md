@@ -114,7 +114,7 @@ var_dump($bike);
 ```
 
 ***
-> Attention: PHP lang looks at every method starting with __ (double underscore) as a magic method.<br/>
+> Attention: PHP lang looks at every method starting with __ (double underscore) as a **magic method**.<br/>
 > Here a table with PHP main magic methods:
 > | Method      | Description |
 > | ----------- | ----------- |
@@ -170,10 +170,10 @@ var_dump($bike);
 In a class of OOP we can also (like in procedural) define a constant.
 Definition of a constant differs in syntax: we define a constant in php by using `const NAMEOFCONSTANT` without any symbol like `$`(constants are case-sensitive, for praxis we name them using all capital letters or also strating with `const __CAPITALLETTERS__`).
 **To define a constant in php we use the base function `define()` and this function accepts only two params: name of constant and the value** -> `define('FAVSPORT', 'basketball')` and the values accepted are: integer, float, string, boolean or null. The idea is that defining a constant has the objective of define a fixed value that cannot change during the script or the entire application. Generally constants have global visibility.
-Function to see all defined constants --> `print_r(get_defined_constants(true));`. 
-Predefined constants are *magic constants* that php lang has to offer (from its core or its extensions/modules)--> for example really useful is the constant `__FILE__` that we use to get the entire path of directory to that file; or also `__DIR__` that prints only the directory path (without that file).
+Function to see all defined constants --> `print_r(get_defined_constants(true));`.<br/> 
+**Predefined constants** are *magic constants* that php lang has to offer (from its core or its extensions/modules)--> for example really useful is the constant `__FILE__` that we use to get the entire path of directory to that file; or also `__DIR__` that prints only the directory path (without that file).
 
-From php5 it is possible to define a constant also in a class. The **big difference with properties and methods of a class** is that **a constant of a class doesn't belong to the instance of that class** (such as props and methods); instead **the constant of a class belongs only to the class** so it is callable only inside classes (for this reason we cannot use $this to refer to constants or use the -> operator to refer to them from outside).
+From php5 it is possible to define a constant also in a class. The **big difference with properties and methods of a class** is that **a constant of a class doesn't belong to the instance of that class** (such as props and methods); instead **the constant of a class belongs only to the class so it is callable only inside classes** (for this reason we cannot use $this to refer to constants or use the -> operator to refer to them from outside).
 ```
 class Bike {
     public $countryOfStore;
@@ -195,7 +195,7 @@ $bike->countryOfStore = 'Italy';
 $bike->getBikeShopComplete();
 echo $bike;
 ```
-As seen above we can access to the constant inside the class in two ways: by using `self` or `the name of the class` followed by `::` the scope operator.
+As seen above we can access to the constant inside the class in two ways: by using `self` or `the name of the class` followed by `::` the **scope operator**.
 > From **php8.3** we can define the type of a constant in its definition -> `const string BASKETBALLTEAM = 'Dallas Mavericks'`. This is useful from the point of view of security (language more typified) and it gives us the possibility to redefine the same constant in an extended class (only if it is of the same type, example a string).
 > ```
 > class One {
@@ -261,6 +261,15 @@ Important note: **in php a class can extend another one, but just one** (not two
 
 ```
 
-In example above we can see some of the main features that *inheritance* brings to us: RoadBike class is an extension of Bike class (child class & parent class); we can see that properties (called also attributes) and methods from parent class has been inherited by child class (public and protected). Instead, the private property declared in parent class Bike has been used in a public method defined inside the same class: this allowed to get this attribute through the use of the public method of parent class (reference to $id_frame, setIdFrame()).
+In example above we can see some of the main features that *inheritance* brings to us: RoadBike class is an extension of Bike class (child class & parent class); we can see that properties (called also attributes) and methods from parent class has been inherited by child class (public and protected). Instead, the private property declared in parent class Bike has been used in a public method defined inside the same class for a reason: this allowed to get this private attribute through the use of the public method of parent class ($id_frame, setIdFrame()).
 
+**Overriding technique**
+It is based on this syntax:
+```
+<?php
+...
+parent::methodToOverride();
+...
+?>
+```
 
