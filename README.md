@@ -140,8 +140,8 @@ There are three levels of visibility:<br/>
 - **private** --> The private visibility grants that properties/methods could be used only inside the same class.
 - **protected** --> The protected level instead is a mix of the previous two: it grants the use of properties/methods inside for sure that class, but also inside other classes that comes from that same class (*inheritance* principle).
 
-Looking at the table above covering some of the most commond magic methods of php we can see that there are two methods used to get/set properties that are inaccesible (because of `private` level of visibility).<br/>
-__get() and set() methods are really useful because in this way we can make accessible private properties outside the class, but they are giving this permission to all properties and so you have to use them carefully: if you are using them, every time you add a new private property you have to add an exception (with an `if` condition to your __get() and __set() functions). It's quite slow and verbose probably.<br/>
+Looking at the table above covering some of the most common magic methods of php we can see that there are two methods used to get/set properties that are inaccesible (because of `private` level of visibility).<br/>
+__get() and set() methods are really useful because in this way we can make accessible private properties outside the class, but, if declared in a "general way" ( __get() & __set() ), they are giving this permission to all properties and so you have to use them carefully: if you are using them, every time you add a new private property you have to add an exception (with an `if` condition to your __get() and __set() global functions). It's quite slow and verbose probably.<br/>
 The best way to move here is to define a **specific getter/setter function** --> the praxis tells us to define the method using `get+NameOfPropertyInCapitalLetter` or `set+NameOfPropertyInCapitalLetter`.
 ```
 class Bike {
@@ -165,13 +165,46 @@ $bike->getSize();
 var_dump($bike);
 ```
 
+### Namespace
+
+Concept introduced by php5.3.0: syntactically the namespace declaration has to be placed before class declaration; the idea is that a namespace is like a file system structure declaration used to assign each class to a specific space.<br/>
+> This from php website -> "What are namespaces? In the broadest definition **namespaces are a way of encapsulating items**. In the PHP world, namespaces are designed to solve two problems that authors of libraries and applications encounter when creating re-usable code elements such as classes or functions:
+> - Name collisions between code you create (internal PHP classes/functions/constants or third-party classes/functions/constants).
+> - Ability to alias (or shorten) Extra_Long_Names designed to alleviate the first problem, improving readability of source code."
+```
+<php
+
+namespace Mobility\MeansOfTransport\Bike;
+
+use Mobility\MeansOfTransport;
+use Mobility\MeansOfTransport\Bike;
+use Mobility\MeansOfTransport\Foot as FootMobility;
+
+class RoadBike extends Bike
+{
+    public function getMobilityMeansOfTransport()
+    {
+        return new MeansOfTransport()::getAll(); // returns an instance of Mobility\MeansOfTransport class and all means (imaging we have written a useful method to retrieve all means in that class)
+    }
+    public function getFootMobility()
+    {
+        return new FootMobility(); // returns an instance of Mobility\MeansOfTransport\Foot class (used the alias "as")
+    }
+    public function getCarMobility()
+    {
+        return new use Mobility\MeansOfTransport\Car();  // returns an instance of Mobility\MeansOfTransport\Car class (also if not used here in this class, but we have to previously had included or required this class or autoloaded them 
+                                                        //  through composer autoloader)
+    }
+}
+```
+
 ### Constants
 
 In a class of OOP we can also (like in procedural) define a constant.
-Definition of a constant differs in syntax: we define a constant in php by using `const NAMEOFCONSTANT` without any symbol like `$`(constants are case-sensitive, for praxis we name them using all capital letters or also strating with `const __CAPITALLETTERS__`).
+Definition of a constant differs in syntax: we define a constant in php by using `const NAMEOFCONSTANT` without any symbol like `$`(constants are case-sensitive, for praxis we name them using all capital letters or also starting/ending with __ `const __CAPITALLETTERS__`).
 **To define a constant in php we use the base function `define()` and this function accepts only two params: name of constant and the value** -> `define('FAVSPORT', 'basketball')` and the values accepted are: integer, float, string, boolean or null. The idea is that defining a constant has the objective of define a fixed value that cannot change during the script or the entire application. Generally constants have global visibility.
 Function to see all defined constants --> `print_r(get_defined_constants(true));`.<br/> 
-**Predefined constants** are *magic constants* that php lang has to offer (from its core or its extensions/modules)--> for example really useful is the constant `__FILE__` that we use to get the entire path of directory to that file; or also `__DIR__` that prints only the directory path (without that file).
+**Predefined constants** are ***magic constants*** that php lang has to offer (from its core or its extensions/modules)--> for example really useful is the constant `__FILE__` that we use to get the entire path of directory to that file; or also `__DIR__` that prints only the directory path (without that file).
 
 From php5 it is possible to define a constant also in a class. The **big difference with properties and methods of a class** is that **a constant of a class doesn't belong to the instance of that class** (such as props and methods); instead **the constant of a class belongs only to the class so it is callable only inside classes** (for this reason we cannot use $this to refer to constants or use the -> operator to refer to them from outside).
 ```
