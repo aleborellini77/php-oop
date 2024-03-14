@@ -31,7 +31,7 @@ class Bike {
           public $model;
 }
 ```
-Praxis is to name the class with first Capital letter (or also example `AboutPage`).
+Praxis is to name the php class with each words with Capital Letter - Pascal Case way (or also example `AboutPage`).
 
 *In object-oriented approach* to call a specific Bike with specific properties you simply instantiate in a variable an object though the generic class previously created (so the class operates as a stamp/template).
 ```
@@ -42,7 +42,7 @@ $bike->model = 'Gryzl';
 var_dump($bike);
 ```
 var_dump gives us the object of type Bike with the specified properties. Here lays the key concept of OOP: the idea of the possibility to call each time we want the class Bike and have different objects (bikes) instantiated.<br/>
-Here we can find further difference with procedural programming: in procedural (the sample done above) in an array *php* has to run through the entire array to go to the index wanted; in OOP instead, using objects, *php* has not to re-run through the entire code, but goes directly to the property/method needed. 
+Here we can find further difference with procedural programming: in procedural (the example done above) in an array *php* has to run through the entire array to go to the index wanted; in OOP instead, using objects, *php* has not to re-run through the entire code, but goes directly to the property/method needed. 
 
 Note: we have used the **single arrow operator (`->`,  operator for assignment of a value to a variable or a constant != from `=>`, that is the operator for key/value assignment)** to call properties to the object and assign a value to them; this is possible because of the `public` declaration of the property in this class.<br/>
 ed. `->` This is also referred to as the **object operator**, or sometimes the single arrow operator.
@@ -75,7 +75,7 @@ var_dump($bike2);
 
 ### Main features of a class
 *Properties* & *Methods* are the two key concepts on which a class is based. We'll see that is possible to consider them as *variables* and *functions*.<br/>
-Instead of access to properties each time using the single arrow operator we can also use/define specifical *methods* (for example if we want to combine more properties in a string to print). In procedural you had to combine access by index for each Bike (sample `$fullmodelbike = $bike['model'] . ' ' . $bike['brand'];`); instead in OOP we define in class a specific method to return full name.
+Instead of access to properties each time using the single arrow operator we can also use/define specifical *methods* (for example if we want to combine more properties in a string to print). In procedural you had to combine access by index for each Bike (sample `$fullmodelbike = $bike['model'] . ' ' . $bike['brand'];`); instead in OOP we define in class *a specific method to return full name*.
 ```
 class Bike {
           public $color;
@@ -95,11 +95,11 @@ $bike->brand = 'Canyon';
 
 echo $bike->fullModel();
 ```
-Two more things emerging from this last snippet: the first one that, like said above, the single arrow operator in php OOP is used also to connect instances to related methods (meaning you can call to an instance methods belonging to the class of that same instance); the second one is simply another note on differences between procedural and OOP, in fact this possibility to define methods inside a class to manage properties and so datas is really precious in order to have faster ways to access to datas.  
+Two more things emerging from this last snippet: the first one that, like said above, *the single arrow operator in php OOP is used also to connect instances to related methods* (meaning you can call to an instance methods belonging to the class of that same instance); the second one is simply another note on differences between procedural and OOP, in fact this possibility to define methods inside a class to manage properties and so datas is really precious in order to have faster ways to access to datas.  
 
-### Class magic method __construct()
+### Magic Method __construct()
 When we instantiate an object for a class (for example using `$bike = new Bike`) is also possible to directly pass some parameters instantiating it.<br/>
-How? Through a php *magic method* is possible to do so -> the __construct() method allows to directly pass parameters when instantiating. This is because this magic method is automatically loaded when the class is istantiated (it's like defining parameters to call for a mixin in SCSS/SASS).
+How? Through a php *magic method* is possible to do so -> the __construct() method allows to directly pass parameters when instantiating. *This is because this magic method is automatically loaded when the class is istantiated* (it's like defining parameters to call for a mixin in SCSS/SASS).
 
 ```
 function __construct($brand, $model, $color)
