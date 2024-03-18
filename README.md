@@ -313,7 +313,7 @@ In general we use the *override technique* to simply recall a method or to overr
 			protected $brand; 
 			private $id_frame; 
 			
-			public function getColor() {
+			public function getColor(): string {
 				return $this->color;
 			}				
 			public function setIdFrame($id_frame) {
@@ -338,7 +338,54 @@ In general we use the *override technique* to simply recall a method or to overr
 
 ___
 
-## 4. Multiple Inheritance
+## 4. Polymorphism & Multiple Inheritance
+Polymorphism concept is linked to all concepts seen up to now. In poor words, it means that an object in OOP can assume different shapes and this is because of new concepts like interfaces and traits.
 
+**Interface**
+An interface is a stamp that defines which methods a class that implements it has to bring with itself mandatorily.  Also, an interface is a different type of stamp (like a class) that can be implemented by a class with more interfaces.
+```
+interface Break {
+	public function stop();
+}
+
+class Bike implements Break {
+	public function stop() {
+
+}
+}
+```
+So, main features of interfaces:
+1. *implements* as keyword to implement an interface;
+2. a class can implement more than one interface at a time (using comma to separate them): we have to remember here the imperative to use interface's methods;
+3. an interface can have only methods, not attributes;
+4. an interface cannot have a constructor method.
+
+**Traits**
+Traits are a useful tool offered by php OOP, created in order to remedy to the restriction of classes that cannot be extended by more than one class. 
+Traits are similar to classes: properties and methods can be declared; then a trait can be used in a class through the keyword `use`. If we need a definition: a trait is like a set of attributes/methods for other classes.
+```
+trait Break {
+	public string $brandBreak;
+	public getBrandBreak(): string
+	{
+		return $this->brandBreak;
+	}
+	public setBrandBreak(string $brandBreak): void
+	{
+		$this->brandBreak = $brandBreak;
+	} 
+}
+
+class Bike {
+	use Break;
+}
+$bike = new Bike;
+$bike->setBrandBreak('Shimano');
+echo $bike->getBrandBreak();
+```
+
+**Abstract classes**
+Abstract classes are classes where it has to be a declaration of one or more abstract methods. This "abstraction" gives to the abstract class the imperative to be declared as `abstract` and to be extended to be used (cannot be instatiated, only extended).
+So, it seems that abstract classes are really similar to Interfaces .. but there are key differences: for example an abstract class can have attributes and other normal methods (not only abstract ones); this means that abstract classes are real classes but only extrendables and not instantiables. 
 
 
